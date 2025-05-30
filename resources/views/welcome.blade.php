@@ -22,7 +22,7 @@
     </head>
     <body class="font-inter antialiased bg-gradient-to-br from-green-50 via-white to-emerald-50 min-h-screen">
         <!-- Navigation - Updated with new color palette -->
-        <nav class="bg-gray-50 shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <nav class="bg-emerald-100 shadow-sm border-b border-gray-200 sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-16">
                     <!-- Logo -->
