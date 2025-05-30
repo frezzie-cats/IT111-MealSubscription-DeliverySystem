@@ -4,41 +4,53 @@
     "description": "7 meals per week for health-focused individuals.",
     "price": 799,
     "billing_cycle": "week",
-    "image_url": "https://th.bing.com/th/id/OIP.Hyo0UGOPbO-wM4CngYQ9pAHaFw?cb=iwp2&w=2534&h=1972&rs=1&pid=ImgDetMain"
+    "image_url": "meal_plan_images/meal1.jpg",
+    "like": 10,
+    "dislike": 2
   },
-  {
+  { 
     "name": "Low-Carb Monthly Plan",
     "description": "Ideal for keto and low-carb lifestyles.",
     "price": 2999,
     "billing_cycle": "month",
-    "image_url": "https://th.bing.com/th/id/OIP.Hyo0UGOPbO-wM4CngYQ9pAHaFw?cb=iwp2&w=2534&h=1972&rs=1&pid=ImgDetMain"
+    "image_url": "meal_plan_images/meal1.jpg",
+    "like": 20,
+    "dislike": 10
   },
   {
     "name": "Family Plan",
     "description": "Meal deliveries for 2–4 people, 5 days a week.",
     "price": 499,
     "billing_cycle": "week",
-    "image_url": "https://th.bing.com/th/id/OIP.Hyo0UGOPbO-wM4CngYQ9pAHaFw?cb=iwp2&w=2534&h=1972&rs=1&pid=ImgDetMain"
+    "image_url": "meal_plan_images/meal1.jpg",
+    "like": 5,
+    "dislike": 2
   },
   {
     "name": "Vegetarian Delight Plan",
     "description": "A week of tasty plant-based meals.",
     "price": 749,
     "billing_cycle": "week",
-    "image_url": "https://th.bing.com/th/id/OIP.PtKJ9eG6f4zFkYFlK7fzdgHaE8?pid=ImgDetMain"
+    "image_url": "meal_plan_images/meal1.jpg",
+    "like": 30,
+    "dislike": 5
   },
   {
     "name": "Bulk Builder Plan",
     "description": "High-protein meals for fitness enthusiasts.",
     "price": 3299,
     "billing_cycle": "month",
-    "image_url": "https://th.bing.com/th/id/OIP.o0N2oGqtI-QTQnHKEoZhAAHaE8?pid=ImgDetMain"
+    "image_url": "meal_plan_images/meal1.jpg",
+    "like": 59,
+    "dislike": 1
   },
   {
     "name": "Student Budget Plan",
     "description": "Affordable meals tailored for students.",
     "price": 399,
     "billing_cycle": "week",
-    "image_url": "https://th.bing.com/th/id/OIP.2aTQzmIw6UOET8S9MRCPoAHaE8?pid=ImgDetMain"
+    "image_url": "meal_plan_images/meal1.jpg",
+    "like": 100,
+    "dislike": 10
   }
 ]

@@ -1,0 +1,22 @@
+[
+    {
+        "comment": "The meals are delicious and always fresh!",
+        "sentiment": "positive"
+    },
+    {
+        "comment": "Fast delivery and great customer service.",
+        "sentiment": "positive"
+    },
+    {
+        "comment": "I love the variety in the meal plans.",
+        "sentiment": "positive"
+    },
+    {
+        "comment": "Affordable and healthy options for students.",
+        "sentiment": "positive"
+    },
+    {
+        "comment": "Easy to subscribe and manage my plan online.",
+        "sentiment": "positive"
+    }
+]

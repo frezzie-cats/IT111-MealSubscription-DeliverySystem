@@ -41,19 +41,45 @@
     <div class="max-w-7xl mx-auto px-6">
         <h3 class="text-3xl font-bold text-center mb-12 text-gray-800">Our Popular Plans</h3>
         <div class="grid md:grid-cols-3 gap-8">
-            @for ($i = 1; $i <= 3; $i++)
+            @php
+                $likedPlans = session('liked_plans', []);
+                $dislikedPlans = session('disliked_plans', []);
+            @endphp
+            @foreach ($popularPlans as $plan)
             <div class="bg-gray-50 rounded-lg shadow-lg hover:shadow-xl transition overflow-hidden">
-                <img src="https://th.bing.com/th/id/OIP.Hyo0UGOPbO-wM4CngYQ9pAHaFw?cb=iwp2&w=2534&h=1972&rs=1&pid=ImgDetMain,{{ $i }}" class="w-full h-48 object-cover" alt="Meal {{ $i }}">
+                <img src="{{ asset('storage/' . $plan->image_url) }}" class="w-full h-48 object-cover" alt="{{ $plan->name }}">
                 <div class="p-6">
-                    <h4 class="text-xl font-bold text-gray-800 mb-2">Weekly Wellness Plan</h4>
-                    <p class="text-gray-600 mb-4 text-sm">7 nutritious meals delivered weekly. Great for those with busy schedules.</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-indigo-600 font-semibold text-lg">₱799/week</span>
-                        <a href="{{ route('subscribe') }}" class="text-indigo-600 font-medium hover:underline">Subscribe</a>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">{{ $plan->name }}</h4>
+                    <p class="text-gray-600 mb-4 text-sm">{{ $plan->description }}</p>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-indigo-600 font-semibold text-lg">₱{{ number_format($plan->price, 2) }}/{{ $plan->billing_cycle }}</span>
+                        <a href="{{ route('subscribe', ['plan' => $plan->id]) }}" class="text-indigo-600 font-medium hover:underline">Subscribe</a>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <!-- Like Form -->
+                        <form action="{{ route('meal-plans.like', $plan->id) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="flex items-center gap-1 group" title="Like">
+                                <svg class="w-6 h-6 {{ in_array($plan->id, $likedPlans) ? 'text-red-500' : 'text-emerald-400 group-hover:text-emerald-600' }} transition" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
+                                </svg>
+                                <span class="text-gray-700">{{ $plan->like }}</span>
+                            </button>
+                        </form>
+                        <!-- Dislike Form -->
+                        <form action="{{ route('meal-plans.dislike', $plan->id) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="flex items-center gap-1 group" title="Dislike">
+                                <svg class="w-6 h-6 {{ in_array($plan->id, $dislikedPlans) ? 'text-red-500' : 'text-red-400 group-hover:text-red-600' }} transition" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 18a1 1 0 01-.707-.293l-6.828-6.829a6 6 0 018.486-8.486l.049.049.049-.049a6 6 0 018.486 8.486l-6.828 6.829A1 1 0 0110 18z"/>
+                                </svg>
+                                <span class="text-gray-700">{{ $plan->dislike }}</span>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 </section>
@@ -62,10 +88,22 @@
 <section class="bg-gray-100 py-20">
     <div class="max-w-4xl mx-auto px-6 text-center">
         <h3 class="text-3xl font-bold text-gray-800 mb-10">What Our Customers Say</h3>
-        <div class="bg-white p-8 rounded shadow-md">
-            <p class="text-gray-700 italic mb-6">"QuickBite has made my life so much easier. I eat healthy every day without the stress of cooking or planning!"</p>
-            <h5 class="font-bold text-indigo-600">– Andrea S., Young Professional</h5>
-        </div>
+        @if(isset($latestFeedbacks) && count($latestFeedbacks))
+            @foreach($latestFeedbacks as $feedback)
+                <div class="bg-white p-8 rounded shadow-md mb-8">
+                    <p class="text-gray-700 italic mb-6">
+                        "{{ $feedback->comment }}"
+                    </p>
+                    <h5 class="font-bold text-indigo-600">
+                        – {{ $feedback->user?->name ?? 'Anonymous' }}
+                    </h5>
+                </div>
+            @endforeach
+        @else
+            <div class="bg-white p-8 rounded shadow-md">
+                <p class="text-gray-700 italic mb-6">No feedback yet.</p>
+            </div>
+        @endif
     </div>
 </section>
 @endsection

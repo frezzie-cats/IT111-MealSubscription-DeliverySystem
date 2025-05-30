@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('meal_plans', function (Blueprint $table) {
+        Schema::create('meal_plan_meals', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
+            $table->foreignId('meal_plan_id')->constrained('meal_plans')->onDelete('cascade');
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->string('billing_cycle', 10);
-            $table->text('image_url')->nullable();
-            $table->integer('like')->default(0);
-            $table->integer('dislike')->default(0);
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('meal_plans');
+        Schema::dropIfExists('meal_plan_meals');
     }
 };

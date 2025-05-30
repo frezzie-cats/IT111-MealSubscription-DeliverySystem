@@ -2,14 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subscription;
+use App\Models\User;
+use App\Models\MealPlan;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use Exception;
-use App\Models\MealPlan;
 
 class SubscriptionController extends Controller
 {
+    public function index()
+    {
+        $subscriptions = Subscription::with(['user', 'mealPlan'])->get();
+        return view('subscriptions.index', compact('subscriptions'));
+    }
+
+    public function create()
+    {
+        $users = User::all();
+        $mealPlans = MealPlan::all();
+        return view('subscriptions.create', compact('users', 'mealPlans'));
+    }
+
     public function store(Request $request)
     {
         // Validate input
@@ -55,5 +70,36 @@ class SubscriptionController extends Controller
             // Redirect back with error message
             return back()->withInput()->withErrors(['stripe' => 'Payment error: ' . $e->getMessage()]);
         }
+    }
+
+    public function show(Subscription $subscription)
+    {
+        return view('subscriptions.show', compact('subscription'));
+    }
+
+    public function edit(Subscription $subscription)
+    {
+        $users = User::all();
+        $mealPlans = MealPlan::all();
+        return view('subscriptions.edit', compact('subscription', 'users', 'mealPlans'));
+    }
+
+    public function update(Request $request, Subscription $subscription)
+    {
+        $data = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'meal_plan_id' => 'required|exists:meal_plans,id',
+            'start_date' => 'required|date',
+            'end_date' => 'nullable|date',
+            'status' => 'required|in:active,cancelled,expired',
+        ]);
+        $subscription->update($data);
+        return redirect()->route('subscriptions.index');
+    }
+
+    public function destroy(Subscription $subscription)
+    {
+        $subscription->delete();
+        return redirect()->route('subscriptions.index');
     }
 }
