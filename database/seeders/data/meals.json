@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Grilled Chicken Salad",
+        "description": "Fresh greens with grilled chicken breast.",
+        "calories": 400,
+        "image_url": "https://example.com/image1.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Beef Stir Fry",
+        "description": "Beef with vegetables and rice.",
+        "calories": 600,
+        "image_url": "https://example.com/image2.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Vegan Bowl",
+        "description": "Quinoa, beans, and avocado.",
+        "calories": 450,
+        "image_url": "https://example.com/image3.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Tuna Sandwich",
+        "description": "Whole grain sandwich with tuna.",
+        "calories": 350,
+        "image_url": "https://example.com/image4.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Low-Carb Chicken",
+        "description": "Chicken breast with steamed vegetables.",
+        "calories": 300,
+        "image_url": "https://example.com/image5.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Keto Omelette",
+        "description": "Egg omelette with cheese and veggies.",
+        "calories": 280,
+        "image_url": "https://example.com/image6.jpg"
+    }
+]

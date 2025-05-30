@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\MealPlanController;
+use App\Http\Controllers\MealPlanMealController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\PaymentController;
 use App\Models\MealPlan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderHistoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,5 +63,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::resource('meal-plan-meals', MealPlanMealController::class);
+Route::resource('subscriptions', SubscriptionController::class);
+Route::resource('deliveries', DeliveryController::class);
+Route::resource('payments', PaymentController::class);
+Route::resource('order_history', OrderHistoryController::class);
 
 require __DIR__.'/auth.php';
