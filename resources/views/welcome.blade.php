@@ -50,11 +50,11 @@
                                     Dashboard
                                 </a>
                             @else
-                                <a href="{{ route('login') }}" class="text-black hover:text-blue-500 px-3 py-2 text-sm font-medium transition-colors">
+                                <a href="{{ route('login') }}" class="text-gray-500 hover:text-blue-500 px-3 py-2 text-sm font-medium transition-colors">
                                     Log in
                                 </a>
                                 @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="text-black hover:text-blue-500 px-3 py-2 text-sm font-medium transition-colors">
+                                    <a href="{{ route('register') }}" class="text-gray-500 hover:text-blue-500 px-3 py-2 text-sm font-medium transition-colors">
                                         Get Started
                                     </a>
                                 @endif
@@ -124,7 +124,7 @@
                                 <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900">
                                     Select Your Plan now!
                                 </h3>
-                                
+
                                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                                     <a href="{{ route('register') }}" class="bg-emerald-400 text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-emerald-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
                                         Start Your Journey
@@ -134,7 +134,7 @@
                                     </a>
                                 </div>
 
-                               
+
                             </div>
                         </div>
 
@@ -143,8 +143,8 @@
                             <div class="relative">
                                 <!-- Plan Card Styling -->
                                 <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] rounded-full overflow-hidden shadow-xl bg-white border-4 border-gray-200 hover:border-emerald-400 transition-colors p-4">
-                                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                                         alt="Fresh healthy meal bowl" 
+                                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                                         alt="Fresh healthy meal bowl"
                                          class="w-full h-full object-cover rounded-full">
                                 </div>
                                 <!-- Decorative elements with updated colors -->
