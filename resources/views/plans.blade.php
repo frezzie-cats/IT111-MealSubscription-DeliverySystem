@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-12">
-    <h2 class="text-4xl font-extrabold text-emerald-400 mb-10 text-center">Basic Meals!</h2>
-    
+    <h2 class="text-4xl font-extrabold text-gray-800 mb-10 text-center">Choose Your Meal Plan</h2>
+
     @php
         $likedPlans = session('liked_plans', []);
         $dislikedPlans = session('disliked_plans', []);
@@ -21,7 +21,6 @@
                     <a href="{{ route('subscribe', ['plan' => $plan->id]) }}" class="text-sm bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-500 transition">
                         Subscribe
                     </a>
-
                 </div>
                 <div class="flex items-center gap-4 mt-2">
                     <!-- Like Form -->
@@ -46,7 +45,8 @@
                     </form>
                 </div>
             </div>
-            @endforeach
         </div>
+        @endforeach
     </div>
-    @endsection
+</div>
+@endsection
