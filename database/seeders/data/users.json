@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Admin User",
+        "email": "admin@example.com",
+        "password": "password"
+    },
+    {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "password": "password"
+    },
+    {
+        "name": "Jane Smith",
+        "email": "jane@example.com",
+        "password": "password"
+    },
+    {
+        "name": "Carlos Reyes",
+        "email": "carlos@example.com",
+        "password": "password"
+    },
+    {
+        "id": 5,
+        "name": "Lisa Ray",
+        "email": "lisa@example.com",
+        "password": "hashed_lisa_pass"
+    }
+]

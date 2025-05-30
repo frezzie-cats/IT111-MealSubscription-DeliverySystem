@@ -7,7 +7,7 @@
     <!-- Meal Plan Summary -->
     <div class="bg-white rounded-lg shadow p-6 mb-10">
         <div class="flex items-center gap-6">
-            <img src="{{ $plan->image_url }}" alt="Meal Plan" class="w-64 rounded">
+            <img src="{{ asset('storage/' . $plan->image_url) }}" alt="Meal Plan" class="w-64 rounded">
             <div>
                 <h3 class="text-2xl font-semibold text-gray-800 mb-2">{{ $plan->name }}</h3>
                 <p class="text-gray-600 mb-4">{{ $plan->description }}</p>
