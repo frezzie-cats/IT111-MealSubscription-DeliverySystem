@@ -14,15 +14,12 @@
         <p class="text-gray-600 mb-6">Are you sure you want to cancel your <strong>Weekly Wellness Plan</strong> subscription?</p>
         <p class="text-sm text-gray-500 mb-6">You will stop receiving meals starting from the next delivery schedule.</p>
 
-        <form action="#" method="POST" class="flex flex-col md:flex-row justify-center gap-4">
+        <form action="{{ route('subscriptions.cancelAction', $subscription->id) }}" method="POST" class="inline">
             @csrf
-            <!-- Replace action="#" with your cancellation route later -->
-
-            <button type="submit"
-                    class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-500 transition">
-                Yes, Cancel It
+            <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-500 transition">
+                Yes, Cancel Subscription
             </button>
-            <a href="{{ route('subscriptions') }}"
+            <a href="{{ route('subscriptions.index') }}"
                class="bg-gray-200 text-gray-700 px-6 py-2 rounded hover:bg-gray-300 transition">
                 Go Back
             </a>

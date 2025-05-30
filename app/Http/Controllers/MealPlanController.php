@@ -83,13 +83,8 @@ class MealPlanController extends Controller
     {
         $plan = MealPlan::findOrFail($id);
         $plan->increment('like');
-
-        // Store liked plan in session
-        $liked = session()->get('liked_plans', []);
-        $liked[] = $id;
-        session(['liked_plans' => array_unique($liked)]);
-
-        return back()->with('success', 'You liked this meal plan!');
+        // Optionally update session likedPlans here
+        return response()->json(['success' => true, 'likes' => $plan->like]);
     }
 
     // Increment dislike count
@@ -97,12 +92,7 @@ class MealPlanController extends Controller
     {
         $plan = MealPlan::findOrFail($id);
         $plan->increment('dislike');
-
-        // Store disliked plan in session
-        $disliked = session()->get('disliked_plans', []);
-        $disliked[] = $id;
-        session(['disliked_plans' => array_unique($disliked)]);
-
-        return back()->with('success', 'You disliked this meal plan.');
+        // Optionally update session dislikedPlans here
+        return response()->json(['success' => true, 'dislikes' => $plan->dislike]);
     }
 }

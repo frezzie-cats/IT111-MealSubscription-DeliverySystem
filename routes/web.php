@@ -9,7 +9,6 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderHistoryController;
-use App\Http\Controllers\FeedbackController;
 use App\Models\Feedback;
 
 // Public routes
@@ -26,6 +25,8 @@ Route::middleware('auth')->group(function () {
         $plan = MealPlan::findOrFail($planId);
         return view('subscribe', compact('plan'));
     })->name('subscribe');
+
+    // Subscription creation
     Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe.store');
 
     // Static pages
@@ -55,22 +56,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Feedbackk
-    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
-    Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
-    Route::get('/feedback/{id}/edit', [FeedbackController::class, 'edit'])->name('feedback.edit');
-    Route::put('/feedback/{id}', [FeedbackController::class, 'update'])->name('feedback.update');
-    Route::delete('/feedback/{id}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
-
-    // Resource routes (CRUD)
-    Route::resource('meal-plan-meals', MealPlanMealController::class);
-    Route::resource('subscriptions', SubscriptionController::class);
-    Route::resource('deliveries', DeliveryController::class);
-    Route::resource('payments', PaymentController::class);
-    Route::resource('order_history', OrderHistoryController::class);
-
 
     // Like/Dislike meal plans
     Route::post('/meal-plans/{id}/like', [MealPlanController::class, 'like'])->name('meal-plans.like');
@@ -78,6 +63,10 @@ Route::middleware('auth')->group(function () {
 
 });
 
-
-
 require __DIR__.'/auth.php';
+require __DIR__.'/feedback.php';
+require __DIR__.'/meal_plan.php';
+require __DIR__.'/subscription.php';
+require __DIR__.'/delivery.php';
+require __DIR__.'/payment.php';
+require __DIR__.'/order_history.php';

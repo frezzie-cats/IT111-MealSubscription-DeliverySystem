@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('meal_plan_id')->constrained()->onDelete('cascade');
             $table->date('start_date');
+            $table->json('delivery_days')->nullable();
             $table->date('end_date')->nullable();
             $table->string('status', 20)->default('active');
             $table->timestamps();
