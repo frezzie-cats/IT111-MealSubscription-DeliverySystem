@@ -2,14 +2,15 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-br from-indigo-600 to-purple-600 text-white py-20">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-        <h2 class="text-5xl font-extrabold leading-tight mb-4">Healthy. Fresh. Delivered.</h2>
-        <p class="text-xl mb-6 max-w-2xl mx-auto">Choose meal plans tailored to your goals. We'll take care of the cooking and delivery, so you can focus on living well.</p>
-        <a href="{{ route('plans') }}" class="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
-            Browse Plans
-        </a>
-    </div>
+<section class="relative bg-cover bg-center text-white py-20" style="background-image: url('/assets/cover.jpg');">
+  <div class="bg-black/40 absolute inset-0 z-0"></div> <!-- Optional overlay for text contrast -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-5xl font-extrabold leading-tight mb-4">Healthy. Fresh. Delivered.</h2>
+    <p class="text-xl mb-6 max-w-2xl mx-auto">Choose meal plans tailored to your goals. We'll take care of the cooking and delivery, so you can focus on living well.</p>
+    <a href="{{ route('plans') }}" class="bg-white text-indigo-600 font-semibold px-6 py-3 rounded-full shadow hover:bg-gray-100 transition">
+      Browse Plans
+    </a>
+  </div>
 </section>
 
 <!-- Features Section -->
