@@ -40,6 +40,10 @@
                 <td class="px-6 py-4">
                     <a href="#" class="text-indigo-600 hover:underline text-sm mr-3">View</a>
                     <a href="#" class="text-red-600 hover:underline text-sm">Delete</a>
+                    @if ($sub['status'] === 'active')
+                    <a href="{{ route('subscriptions.cancel') }}" 
+                        class="bg-red-600 text-white text-sm px-4 py-2 rounded hover:bg-red-500 transition">Cancel Subscription</a>
+                    @endif
                 </td>
             </tr>
             @endforeach

@@ -1,32 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="max-w-6xl mx-auto px-6 py-12">
-    <h2 class="text-3xl font-bold text-gray-800 mb-8">Welcome, {{ Auth::user()->name }}</h2>
-
-    <!-- Active Subscription Summary -->
-    <div class="bg-white rounded-lg shadow p-6 mb-10">
-        <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-semibold text-indigo-600">Your Active Subscription</h3>
-            <a href="{{ route('subscriptions') }}" class="text-sm text-indigo-600 hover:underline">
-                View All Subscriptions
-            </a>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-6">
-            <div>
-                <p class="text-gray-700"><strong>Plan:</strong> Weekly Wellness Plan</p>
-                <p class="text-gray-700"><strong>Start Date:</strong> April 28, 2025</p>
-                <p class="text-gray-700"><strong>Delivery Days:</strong> Monday, Wednesday, Friday</p>
-            </div>
-            <div>
-                <p class="text-gray-700"><strong>Status:</strong> <span class="text-green-600 font-semibold">Active</span></p>
-                <p class="text-gray-700"><strong>Next Delivery:</strong> May 24, 2025</p>
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 text-gray-900">
+                <h3 class="text-2xl font-bold mb-6">Quick Navigation</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <a href="{{ route('plans') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">Meal Plans</div>
+                        <div class="text-sm text-gray-600">Browse available meal plans.</div>
+                    </a>
+                    <a href="{{ route('plans') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">Subscribe</div>
+                        <div class="text-sm text-gray-600">Start a new subscription.</div>
+                    </a>
+                    <a href="{{ url('/schedule') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">Delivery Schedule</div>
+                        <div class="text-sm text-gray-600">View your delivery schedule.</div>
+                    </a>
+                    <a href="{{ url('/subscriptions') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">My Subscriptions</div>
+                        <div class="text-sm text-gray-600">Manage your subscriptions.</div>
+                    </a>
+                    <a href="{{ url('/about') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">About</div>
+                        <div class="text-sm text-gray-600">Learn more about us.</div>
+                    </a>
+                    <a href="{{ url('/contact') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">Contact</div>
+                        <div class="text-sm text-gray-600">Get in touch with our team.</div>
+                    </a>
+                    <a href="{{ url('/cancel-subscription') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">Cancel Subscription</div>
+                        <div class="text-sm text-gray-600">Cancel your current subscription.</div>
+                    </a>
+                    <a href="{{ url('/checkout-success') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                        <div class="font-semibold">Checkout Success</div>
+                        <div class="text-sm text-gray-600">See confirmation after successful checkout.</div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- (Optional) Delivery Preview -->
-    {{-- Future feature: delivery schedule preview or order tracking --}}
 </div>
 @endsection

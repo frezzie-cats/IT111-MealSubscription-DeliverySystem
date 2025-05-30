@@ -1,42 +1,41 @@
 <?php
 
+use App\Http\Controllers\MealPlanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionController;
+use App\Models\MealPlan;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('welcome');
 });
 
-Route::get('/subscribe', function () {
-    return view('subscribe');
+// Main pages
+Route::get('/plans', [MealPlanController::class, 'index'])->name('plans');
+
+Route::get('/subscribe/{plan}', function ($planId) {
+    $plan = MealPlan::findOrFail($planId);
+    return view('subscribe', compact('plan'));
 })->name('subscribe');
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe.store');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/subscriptions', function () {
-        return view('subscriptions');
-    })->name('subscriptions');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::middleware(['auth'])->get('/schedule', function () {
+Route::get('/schedule', function () {
     return view('schedule');
 })->name('schedule');
 
-Route::middleware(['auth'])->get('/checkout/success', function () {
-    return view('checkout-success');
-})->name('checkout.success');
+Route::get('/subscriptions', function () {
+    return view('subscriptions');
+})->name('subscriptions');
 
-Route::middleware(['auth'])->get('/subscriptions/cancel', function () {
+Route::get('/subscriptions/cancel', function () {
+    // You can return a view or handle cancellation logic here
     return view('cancel-subscription');
 })->name('subscriptions.cancel');
-
-Route::get('/plans', function () {
-    return view('plans');
-})->name('plans');
 
 Route::get('/about', function () {
     return view('about');
@@ -46,36 +45,15 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-//Admin
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-});
+Route::get('/cancel-subscription', function () {
+    return view('cancel-subscription');
+})->name('cancel-subscription');
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
-    Route::view('/meals', 'admin.meals')->name('meals');
-});
+Route::get('/checkout-success', function () {
+    return view('checkout-success');
+})->name('checkout-success');
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::view('/users', 'admin.users')->name('users');
-});
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::view('/subscriptions', 'admin.subscriptions')->name('subscriptions');
-});
-
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::view('/deliveries', 'admin.deliveries')->name('deliveries');
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
-
+// Profile routes (auth required)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
