@@ -143,7 +143,7 @@
                             <div class="relative">
                                 <!-- Plan Card Styling -->
                                 <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] xl:w-[500px] xl:h-[500px] rounded-full overflow-hidden shadow-xl bg-white border-4 border-gray-200 hover:border-emerald-400 transition-colors p-4">
-                                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                                    <img src="{{ asset('storage\welcome_images\welcome_image.avif') }}"
                                          alt="Fresh healthy meal bowl"
                                          class="w-full h-full object-cover rounded-full">
                                 </div>

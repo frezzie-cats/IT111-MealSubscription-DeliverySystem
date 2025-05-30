@@ -16,7 +16,7 @@ class SubscriptionController extends Controller
     public function index()
     {
         $subscriptions = Subscription::with(['user', 'mealPlan'])->get();
-        return view('subscriptions.index', compact('subscriptions'));
+        return view('subscriptions', compact('subscriptions'));
     }
 
     public function create()
@@ -26,12 +26,18 @@ class SubscriptionController extends Controller
         return view('subscriptions.create', compact('users', 'mealPlans'));
     }
 
+    public function cancel($id)
+    {
+        $subscription = Subscription::findOrFail($id);
+        return view('cancel-subscription', compact('subscription'));
+    }
+
     public function store(Request $request)
     {
         // Validate input
         $request->validate([
             'plan_id' => 'required|exists:meal_plans,id',
-            'delivery_days' => 'required|array',
+            'delivery_days' => 'required|array|min:1',
             'start_date' => 'required|date',
         ]);
 
@@ -61,7 +67,7 @@ class SubscriptionController extends Controller
                     'user_id' => auth()->id(),
                     'plan_id' => $plan->id,
                     'start_date' => $request->start_date,
-                    // ...other fields
+                    'delivery_days' => json_encode($request->delivery_days), // Pass as JSON string
                 ],
             ]);
 
@@ -107,7 +113,6 @@ class SubscriptionController extends Controller
 
     public function checkoutSuccess(Request $request)
     {
-        // Get the session_id from the query string
         $session_id = $request->get('session_id');
         if (!$session_id) {
             return redirect()->route('dashboard')->with('error', 'No session ID found.');
@@ -116,7 +121,6 @@ class SubscriptionController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET'));
         $session = StripeSession::retrieve($session_id);
 
-        // Only insert payment if not already recorded
         $existing = Payment::where('user_id', $session->metadata->user_id ?? null)
             ->where('amount', $session->amount_total / 100)
             ->where('status', 'paid')
@@ -124,11 +128,16 @@ class SubscriptionController extends Controller
 
         if (!$existing) {
             // 1. Create the subscription
+            $deliveryDays = isset($session->metadata->delivery_days)
+                ? json_decode($session->metadata->delivery_days, true)
+                : [];
+
             $subscription = Subscription::create([
                 'user_id' => $session->metadata->user_id ?? auth()->id(),
-                'meal_plan_id' => $session->metadata->plan_id ?? null, // Correct column name
+                'meal_plan_id' => $session->metadata->plan_id ?? null,
                 'start_date' => $session->metadata->start_date ?? now(),
-                // ...other fields as needed
+                'delivery_days' => $deliveryDays,
+                'status' => 'active',
             ]);
 
             // 2. Create the payment with the subscription_id
@@ -143,5 +152,10 @@ class SubscriptionController extends Controller
         }
 
         return view('checkout-success');
+    }
+    public function cancelAction(Subscription $subscription)
+    {
+        $subscription->update(['status' => 'cancelled']);
+        return redirect()->route('subscriptions.index')->with('success', 'Subscription cancelled successfully.');
     }
 }

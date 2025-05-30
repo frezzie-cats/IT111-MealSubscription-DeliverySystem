@@ -23,26 +23,28 @@
                     </a>
                 </div>
                 <div class="flex items-center gap-4 mt-2">
-                    <!-- Like Form -->
-                    <form action="{{ route('meal-plans.like', $plan->id) }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="flex items-center gap-1 group" title="Like">
-                            <svg class="w-6 h-6 {{ in_array($plan->id, $likedPlans) ? 'text-red-500' : 'text-emerald-400 group-hover:text-emerald-600' }} transition" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                            </svg>
-                            <span class="text-gray-700">{{ $plan->like }}</span>
-                        </button>
-                    </form>
-                    <!-- Dislike Form -->
-                    <form action="{{ route('meal-plans.dislike', $plan->id) }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="flex items-center gap-1 group" title="Dislike">
-                            <svg class="w-6 h-6 {{ in_array($plan->id, $dislikedPlans) ? 'text-red-500' : 'text-red-400 group-hover:text-red-600' }} transition" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10 18a1 1 0 01-.707-.293l-6.828-6.829a6 6 0 018.486-8.486l.049.049.049-.049a6 6 0 018.486 8.486l-6.828 6.829A1 1 0 0110 18z" />
-                            </svg>
-                            <span class="text-gray-700">{{ $plan->dislike }}</span>
-                        </button>
-                    </form>
+                    <!-- Like Button -->
+                    <button type="button"
+                        class="flex items-center gap-1 group like-btn"
+                        data-id="{{ $plan->id }}"
+                        title="Like"
+                        style="outline: none; border: none; background: none;">
+                        <img src="{{ asset('storage/icons/thumbs-up.png') }}"
+                             alt="Like"
+                             class="w-6 h-6 like-icon {{ in_array($plan->id, $likedPlans) ? 'filter-blue' : 'filter-gray' }}">
+                        <span class="text-gray-700 like-count">{{ $plan->like }}</span>
+                    </button>
+                    <!-- Dislike Button -->
+                    <button type="button"
+                        class="flex items-center gap-1 group dislike-btn"
+                        data-id="{{ $plan->id }}"
+                        title="Dislike"
+                        style="outline: none; border: none; background: none;">
+                        <img src="{{ asset('storage/icons/thumbs-down.png') }}"
+                             alt="Dislike"
+                             class="w-6 h-6 dislike-icon {{ in_array($plan->id, $dislikedPlans) ? 'filter-red' : 'filter-gray' }}">
+                        <span class="text-gray-700 dislike-count">{{ $plan->dislike }}</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -135,4 +137,54 @@
 
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Like
+    document.querySelectorAll('.like-btn').forEach(function(btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const planId = this.dataset.id;
+            fetch(`/meal-plans/${planId}/like`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    this.querySelector('.like-icon').classList.add('filter-blue');
+                    this.querySelector('.like-icon').classList.remove('filter-gray');
+                    this.querySelector('.like-count').textContent = data.likes;
+                }
+            });
+        });
+    });
+
+    // Dislike
+    document.querySelectorAll('.dislike-btn').forEach(function(btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const planId = this.dataset.id;
+            fetch(`/meal-plans/${planId}/dislike`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    this.querySelector('.dislike-icon').classList.add('filter-red');
+                    this.querySelector('.dislike-icon').classList.remove('filter-gray');
+                    this.querySelector('.dislike-count').textContent = data.dislikes;
+                }
+            });
+        });
+    });
+});
+</script>
 @endsection
+

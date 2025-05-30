@@ -32,11 +32,15 @@
             <div class="grid grid-cols-3 gap-2">
                 @foreach(['Monday', 'Wednesday', 'Friday'] as $day)
                 <label class="inline-flex items-center">
-                    <input type="checkbox" name="delivery_days[]" value="{{ $day }}" class="form-checkbox text-indigo-600">
+                    <input type="checkbox" name="delivery_days[]" value="{{ $day }}" class="form-checkbox text-indigo-600"
+                        {{ (is_array(old('delivery_days')) && in_array($day, old('delivery_days'))) ? 'checked' : '' }}>
                     <span class="ml-2 text-gray-700">{{ $day }}</span>
                 </label>
                 @endforeach
             </div>
+            @error('delivery_days')
+                <div class="text-red-500 text-sm">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-6">
