@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/contact', 'contact')->name('contact');
     Route::view('/subscriptions/cancel', 'cancel-subscription')->name('subscriptions.cancel');
     Route::view('/cancel-subscription', 'cancel-subscription')->name('cancel-subscription');
-    Route::view('/checkout-success', 'checkout-success')->name('checkout-success');
+    Route::get('/checkout-success', [SubscriptionController::class, 'checkoutSuccess'])->name('checkout-success');
 
     // Dashboard (show top 3 popular plans)
     Route::get('/dashboard', function () {

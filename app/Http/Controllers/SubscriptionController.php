@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Subscription;
 use App\Models\User;
 use App\Models\MealPlan;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
@@ -54,12 +55,13 @@ class SubscriptionController extends Controller
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => route('checkout-success'),
+                'success_url' => route('checkout-success') . '?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => url()->previous(),
                 'metadata' => [
                     'user_id' => auth()->id(),
-                    'delivery_days' => implode(',', $request->delivery_days),
+                    'plan_id' => $plan->id,
                     'start_date' => $request->start_date,
+                    // ...other fields
                 ],
             ]);
 
@@ -101,5 +103,45 @@ class SubscriptionController extends Controller
     {
         $subscription->delete();
         return redirect()->route('subscriptions.index');
+    }
+
+    public function checkoutSuccess(Request $request)
+    {
+        // Get the session_id from the query string
+        $session_id = $request->get('session_id');
+        if (!$session_id) {
+            return redirect()->route('dashboard')->with('error', 'No session ID found.');
+        }
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $session = StripeSession::retrieve($session_id);
+
+        // Only insert payment if not already recorded
+        $existing = Payment::where('user_id', $session->metadata->user_id ?? null)
+            ->where('amount', $session->amount_total / 100)
+            ->where('status', 'paid')
+            ->first();
+
+        if (!$existing) {
+            // 1. Create the subscription
+            $subscription = Subscription::create([
+                'user_id' => $session->metadata->user_id ?? auth()->id(),
+                'meal_plan_id' => $session->metadata->plan_id ?? null, // Correct column name
+                'start_date' => $session->metadata->start_date ?? now(),
+                // ...other fields as needed
+            ]);
+
+            // 2. Create the payment with the subscription_id
+            Payment::create([
+                'user_id' => $subscription->user_id,
+                'subscription_id' => $subscription->id,
+                'amount' => $session->amount_total / 100,
+                'payment_date' => now(),
+                'payment_method' => 'stripe',
+                'status' => 'paid',
+            ]);
+        }
+
+        return view('checkout-success');
     }
 }
