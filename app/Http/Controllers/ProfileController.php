@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\PaymentMethod;
 
 class ProfileController extends Controller
 {
@@ -16,8 +19,22 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $user = $request->user();
+        $card = null;
+
+        if ($user->stripe_customer_id) {
+            Stripe::setApiKey(config('services.stripe.secret'));
+            // Get the first card payment method for this customer
+            $paymentMethods = PaymentMethod::all([
+                'customer' => $user->stripe_customer_id,
+                'type' => 'card',
+            ]);
+            $card = $paymentMethods->data[0] ?? null;
+        }
+
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user,
+            'card' => $card,
         ]);
     }
 
