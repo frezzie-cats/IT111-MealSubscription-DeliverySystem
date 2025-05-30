@@ -52,6 +52,17 @@
                         <p class="text-sm text-gray-600">End Date: {{ \Carbon\Carbon::parse($subscription->end_date)->format('F d, Y') }}</p>
                     @endif
                     <span class="inline-block mt-2 text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded">{{ ucfirst($subscription->status) }}</span>
+
+                    @if($subscription->status === 'cancelled')
+                        <form action="{{ route('subscriptions.destroy', $subscription->id) }}" method="POST" class="inline-block mt-4"
+                              onsubmit="return confirm('Are you sure you want to permanently delete this subscription?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 transition">
+                                Delete
+                            </button>
+                        </form>
+                    @endif
                 </div>
             @empty
                 <div class="bg-white rounded-lg shadow p-6 text-gray-500">No previous subscriptions.</div>

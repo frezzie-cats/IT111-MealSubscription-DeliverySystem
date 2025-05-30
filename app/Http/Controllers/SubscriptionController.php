@@ -121,12 +121,24 @@ class SubscriptionController extends Controller
         Stripe::setApiKey(env('STRIPE_SECRET'));
         $session = StripeSession::retrieve($session_id);
 
-        $existing = Payment::where('user_id', $session->metadata->user_id ?? null)
+        // Check for an active subscription for this user and meal plan
+        $activeSubscription = Subscription::where('user_id', $session->metadata->user_id ?? auth()->id())
+            ->where('meal_plan_id', $session->metadata->plan_id ?? null)
+            ->where('status', 'active')
+            ->first();
+
+        if ($activeSubscription) {
+            // User already has an active subscription for this meal plan
+            return redirect()->route('subscriptions.index')->with('error', 'You already have an active subscription for this meal plan.');
+        }
+
+        // Prevent duplicate payment records
+        $existingPayment = Payment::where('user_id', $session->metadata->user_id ?? null)
             ->where('amount', $session->amount_total / 100)
             ->where('status', 'paid')
             ->first();
 
-        if (!$existing) {
+        if (!$existingPayment) {
             // 1. Create the subscription
             $deliveryDays = isset($session->metadata->delivery_days)
                 ? json_decode($session->metadata->delivery_days, true)
