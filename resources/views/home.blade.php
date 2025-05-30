@@ -86,7 +86,7 @@
 </section>
 
 <!-- Testimonials -->
-<section class="bg-gray-100 py-20">
+<section class="bg-emerald-100 py-20">
     <div class="max-w-4xl mx-auto px-6 text-center">
         <h3 class="text-3xl font-bold text-gray-800 mb-10">What Our Customers Say</h3>
         @if(isset($latestFeedbacks) && count($latestFeedbacks))
