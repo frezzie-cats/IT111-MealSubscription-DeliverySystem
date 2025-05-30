@@ -50,6 +50,91 @@
         </div>
         @endforeach
     </div>
+    <br><br><br><br><br>
+
+    <section class="my-landscape-section bg-black">
+  <img src="/assets/vegies.avif" alt="Landscape" class="w-full object-cover">
+</section>
+
+<div class="w-full py-12">
+
+    {{-- Basic Meals --}}
+<h2 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-400 via-emerald-500 to-emerald-400 leading-none tracking-tight mb-10 pt-24 [text-shadow:_-8px_0px_0_rgba(16,185,129,0.6)]">
+  FEATURED MEALS
+</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 mb-12">
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/spanish.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Egg and Spanish Omelette</h4>
+            <p class="text-sm text-gray-600">Low Carb</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/tuna.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Tuna Lettuce Wrap</h4>
+            <p class="text-sm text-gray-600">Low Carb</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/cucumber.webp') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Cucumber Slices with Cream Cheese</h4>
+            <p class="text-sm text-gray-600">Low Carb</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/berries.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Greek Yogurt with Chia Seeds and Berries</h4>
+            <p class="text-sm text-gray-600">Low Carb</p>
+        </a>
+    </div>
+
+    {{-- Standard Meals --}}
+    <h2 class="text-4xl font-extrabold text-gray-100 mb-10 text-center">Standard Meals!</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 mb-12">
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/chicken.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Grilled Chicken with Mixed Veggies</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/beans.jpeg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Baked Tilapia with Green Beans</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/sandwhich.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Chicken Sandwich</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/cup.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Fruit Cup with Cottage Cheese</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein</p>
+        </a>
+    </div>
+
+    {{-- Premium Meals --}}
+    <h2 class="text-4xl font-extrabold text-gray-100 mb-10 text-center">Premium Meals!</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 mb-12">
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/salmon.png') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Grilled Salmon with Asparagus and Lemon Butter Sauce</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein + Rich in omega-3 fatty acids, supports heart and brain health, anti-inflammatory</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/grilled.webp') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Herb-Crusted Chicken Breast with Cauliflower Purée</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein + High in lean protein, supports muscle maintenance, cauliflower is high in fiber and antioxidants</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/avocado.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Seared Tuna Steak with Mixed Greens and Avocado</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein + High in lean protein and omega-3s for heart and joint health, avocado adds healthy monounsaturated fats and potassium</p>
+        </a>
+    <a href="#" class="bg-white rounded-xl shadow-lg transition transform hover:-translate-y-1 p-4 text-center animate-float-left-right">
+            <img src="{{ asset('assets/straw.jpg') }}" alt="Basic Plan" class="w-full h-32 object-cover rounded mb-3">
+            <h4 class="text-lg font-bold text-gray-800">Mixed Berry Salad with Walnuts and Feta Cheese</h4>
+            <p class="text-sm text-gray-600">Low Carb & Rich in Protein + High in antioxidants, fiber, and healthy fats, supports brain and heart health, walnut and feta add protein and flavor</p>
+        </a>
+    </div>
+
 </div>
 
 <script>
@@ -102,3 +187,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 @endsection
+
