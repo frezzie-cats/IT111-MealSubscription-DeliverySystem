@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             MealPlanSeeder::class,
             MealSeeder::class,
             UserSeeder::class,
+            FeedbackSeeder::class
         ]);
     }
 }
