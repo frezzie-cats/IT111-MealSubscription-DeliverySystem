@@ -11,7 +11,7 @@
                         <div class="font-semibold">Meal Plans</div>
                         <div class="text-sm text-gray-600">Browse available meal plans.</div>
                     </a>
-                    <a href="{{ route('subscribe') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
+                    <a href="{{ route('plans') }}" class="block p-4 bg-indigo-50 rounded hover:bg-indigo-100">
                         <div class="font-semibold">Subscribe</div>
                         <div class="text-sm text-gray-600">Start a new subscription.</div>
                     </a>

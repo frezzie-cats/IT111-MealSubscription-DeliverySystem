@@ -7,18 +7,25 @@
     <!-- Meal Plan Summary -->
     <div class="bg-white rounded-lg shadow p-6 mb-10">
         <div class="flex items-center gap-6">
-            <img src="https://th.bing.com/th/id/OIP.Hyo0UGOPbO-wM4CngYQ9pAHaFw?cb=iwp2&w=2534&h=1972&rs=1&pid=ImgDetMain" alt="Meal Plan" class="w-64 rounded">
+            <img src="{{ $plan->image_url }}" alt="Meal Plan" class="w-64 rounded">
             <div>
-                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Weekly Wellness Plan</h3>
-                <p class="text-gray-600 mb-4">7 freshly prepared meals delivered weekly. Ideal for health-conscious individuals and busy professionals.</p>
-                <span class="text-indigo-600 font-bold text-xl">₱799/week</span>
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">{{ $plan->name }}</h3>
+                <p class="text-gray-600 mb-4">{{ $plan->description }}</p>
+                <span class="text-indigo-600 font-bold text-xl">₱{{ number_format($plan->price, 2) }}/{{ $plan->billing_cycle }}</span>
             </div>
         </div>
     </div>
 
     <!-- Subscription Options -->
-    <form action="#" method="POST" class="bg-white rounded-lg shadow p-6">
+    <form action="{{ route('subscribe.store') }}" method="POST" class="bg-white rounded-lg shadow p-6">
         @csrf
+        <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+
+        @if ($errors->has('stripe'))
+            <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
+                {{ $errors->first('stripe') }}
+            </div>
+        @endif
 
         <div class="mb-6">
             <label for="delivery_days" class="block text-sm font-medium text-gray-700 mb-2">Choose Your Delivery Days</label>

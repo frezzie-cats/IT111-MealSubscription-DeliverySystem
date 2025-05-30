@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\MealPlanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubscriptionController;
+use App\Models\MealPlan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,13 +11,14 @@ Route::get('/', function () {
 });
 
 // Main pages
-Route::get('/plans', function () {
-    return view('plans');
-})->name('plans');
+Route::get('/plans', [MealPlanController::class, 'index'])->name('plans');
 
-Route::get('/subscribe', function () {
-    return view('subscribe');
+Route::get('/subscribe/{plan}', function ($planId) {
+    $plan = MealPlan::findOrFail($planId);
+    return view('subscribe', compact('plan'));
 })->name('subscribe');
+
+Route::post('/subscribe', [SubscriptionController::class, 'store'])->name('subscribe.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
